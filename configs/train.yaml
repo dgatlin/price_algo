@@ -1,0 +1,20 @@
+# Training configuration
+# Data splitting
+train_start_date: null
+train_end_date: null
+val_start_date: null
+val_end_date: null
+test_start_date: null
+test_end_date: null
+
+# Optuna parameters
+n_trials: 100
+n_jobs: -1
+random_state: 42
+
+# Primary metric to optimize
+primary_metric: "wape"  # Options: wape, mae, tail_mae
+
+# Cross-validation
+cv_folds: 5
+

@@ -1,0 +1,58 @@
+{
+  "config": {
+    "drift_threshold": 0.05,
+    "reference_data_path": null,
+    "drift_methods": [
+      "ks"
+    ],
+    "feature_drift_enabled": true,
+    "categorical_features": [],
+    "numerical_features": [
+      "feature1"
+    ],
+    "ks_test_params": {
+      "alternative": "two-sided"
+    },
+    "mmd_test_params": {
+      "kernel": "rbf",
+      "sigma": 1.0
+    },
+    "wasserstein_test_params": {},
+    "monitoring_frequency": 1,
+    "alert_on_drift": true,
+    "log_drift_results": true,
+    "save_drift_results": true,
+    "drift_results_path": "monitoring/drift_results.json"
+  },
+  "drift_history": [
+    {
+      "is_drift": true,
+      "drift_score": 1.0,
+      "p_value": 0.0,
+      "method": "ks",
+      "feature_name": null,
+      "threshold": 0.05,
+      "timestamp": "2025-09-15T12:44:00.811147"
+    }
+  ],
+  "summary": {
+    "total_checks": 1,
+    "drift_detected": 1,
+    "drift_rate": 1.0,
+    "methods_used": [
+      "ks"
+    ],
+    "latest_drift": [
+      {
+        "is_drift": true,
+        "drift_score": 1.0,
+        "p_value": 0.0,
+        "method": "ks",
+        "feature_name": null,
+        "threshold": 0.05,
+        "timestamp": "2025-09-15T12:44:00.811147"
+      }
+    ],
+    "last_check": "2025-09-15T12:44:00.811147"
+  }
+}

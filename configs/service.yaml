@@ -1,0 +1,21 @@
+# Service configuration
+model_name: "pricing-rf"
+model_version: "latest"
+host: "0.0.0.0"
+port: 8000
+debug: false
+
+# MLflow
+mlflow_tracking_uri: "http://localhost:5000"
+
+# Authentication
+enable_auth: false
+jwt_secret: null
+allowed_ips: []
+
+# CORS
+cors_origins: ["*"]
+cors_allow_credentials: true
+cors_allow_methods: ["*"]
+cors_allow_headers: ["*"]
+

@@ -1,0 +1,21 @@
+# Data configuration
+raw_data_path: "data/raw.csv"
+processed_data_path: "data/processed.parquet"
+time_column: "timestamp"
+target_column: "price"
+
+# Feature lists
+feature_columns:
+  - "feature1"
+  - "feature2"
+  - "feature3"
+  - "category_feature"
+
+categorical_features:
+  - "category_feature"
+
+numerical_features:
+  - "feature1"
+  - "feature2"
+  - "feature3"
+
