@@ -1,103 +1,153 @@
 # Pricing Random Forest Model
 
-A machine learning project for price prediction using Random Forest with MLflow integration, FastAPI service, and comprehensive feature engineering.
+A comprehensive pricing prediction system built on a Random Forest regressor with production-grade MLOps: real-time drift detection, MLflow tracking/registry, Optuna hyperparameter optimization, and a FastAPI service for low-latency inference. It delivers an end-to-end path from data to deployment with enterprise-ready monitoring and documentation.
 
-## Project Structure
+## 🎯 Core Objectives
+- Price prediction using Random Forest regression
+- Production deployment via REST API with monitoring and health checks
+- Data-drift detection for live traffic
+- MLOps best practices across CI/CD, testing, registry, and dashboards
+- Cost-efficient, low-latency serving suitable for scale
+- Hooks for underwriting integration and risk-aware decisioning
 
-```
-price_algo/
-├─ notebooks/                    # Jupyter notebooks for analysis
-│  ├─ 01_eda.ipynb             # Exploratory Data Analysis
-│  ├─ 02_feature_prototypes.ipynb  # Feature Engineering
-│  └─ 03_model_dev_rf.ipynb    # Model Development
-├─ data/                        # Data storage (gitignored)
-│  ├─ raw.csv                  # Raw dataset
-│  └─ processed.parquet        # Processed dataset
-├─ src/                        # Source code
-│  ├─ pricing_rf/             # Core ML package
-│  │  ├─ __init__.py
-│  │  ├─ config.py            # Pydantic settings
-│  │  ├─ data.py              # Data loading & cleaning
-│  │  ├─ features.py          # Feature engineering
-│  │  ├─ metrics.py           # Custom metrics
-│  │  ├─ model.py             # Random Forest models
-│  │  └─ utils.py             # Utility functions
-│  ├─ training/               # Training pipeline
-│  │  ├─ train.py             # Main training script
-│  │  └─ objective.py         # Optuna objective
-│  ├─ monitoring/             # Monitoring and drift detection
-│  │  ├─ __init__.py
-│  │  ├─ monitoring_config.py # Monitoring configuration
-│  │  ├─ drift_detector.py    # Core drift detection
-│  │  ├─ monitoring_service.py # High-level monitoring service
-│  │  └─ monitoring_endpoints.py # FastAPI monitoring endpoints
-│  └─ service/                # FastAPI service
-│     ├─ app.py               # FastAPI application
-│     ├─ schemas.py           # Pydantic schemas
-│     ├─ inference.py         # Model inference
-│     └─ auth.py              # Authentication
-├─ configs/                   # Configuration files
-│  ├─ data.yaml              # Data configuration
-│  ├─ train.yaml             # Training configuration
-│  └─ service.yaml           # Service configuration
-├─ mlflow/                    # MLflow setup
-│  └─ docker-compose.yml     # MLflow + Postgres + MinIO
-├─ tests/                     # Test suite
-│  ├─ test_features.py
-│  ├─ test_training.py
-│  └─ test_service.py
-├─ docs/                      # Documentation
-│  ├─ README.md              # Documentation overview
-│  ├─ API_USAGE_GUIDE.md     # API usage guide
-│  ├─ MODEL_DOCUMENTATION.md # Model technical details
-│  ├─ DEVELOPMENT_GUIDE.md   # Development instructions
-│  └─ DEPLOYMENT_GUIDE.md    # Production deployment
-├─ pyproject.toml            # Dependencies & tooling
-├─ Makefile                  # Development commands
-└─ README.md
-```
 
-## Features
+## 🚀 Live Demo
 
-- **Random Forest Model**: Optimized with Optuna hyperparameter tuning
-- **Feature Engineering**: Time-based, lag, rolling, and price change features
-- **MLflow Integration**: Model versioning, tracking, and deployment
-- **FastAPI Service**: RESTful API for model inference
-- **Data Drift Detection**: Real-time monitoring with Alibi Detect
-- **Custom Metrics**: WAPE, tail MAE, directional accuracy, and more
-- **Time Series Validation**: Proper time-based data splitting
-- **Authentication**: Optional JWT and IP-based authentication
-- **Comprehensive Testing**: Unit tests for all modules
-- **Docker Support**: Containerized MLflow with Postgres and MinIO
+### FastAPI Interactive Documentation
+The service provides comprehensive API documentation with interactive testing capabilities:
 
-## Project Optimization
+![FastAPI Documentation](docs/images/fastapi_docs.png)
 
-This project has been optimized for distribution and reduced from **~1.03 GB to 7.5 MB** (99.3% size reduction). The following temporary files have been removed:
+### MLflow Experiment Tracking
+Monitor model training, hyperparameter optimization, and model registry:
 
-- `.venv/` directory (virtual environment)
-- `__pycache__/` directories (Python bytecode cache)
-- `*.pyc` and `*.pyo` files (compiled Python files)
-- `.pytest_cache/` directories (pytest cache)
-- `.coverage` files (coverage data)
-- `htmlcov/` directories (HTML coverage reports)
-- `.mypy_cache/` directories (mypy type checker cache)
+![MLflow Experiments](docs/images/mlflow_experiments.png)
 
-**For new users**: You'll need to create your own virtual environment and install dependencies as shown in the Quick Start section above.
+### Walk-Forward Backtesting Performance
+Comprehensive backtesting analysis with performance visualization over time:
 
-## What's Included (7.5 MB)
+![Backtesting Performance](docs/images/backtesting_performance.png)
 
-The optimized project includes all essential components for immediate use:
+## 🧱 System Architecture
 
-- **Source Code** (256 KB): Complete ML pipeline, FastAPI service, and monitoring system
-- **Trained Model** (3.9 MB): MLflow model registry with trained Random Forest model
-- **MLflow Database** (220 KB): Model metadata and experiment tracking data
-- **Sample Data** (1.8 MB): Raw CSV data and processed Parquet files for drift detection
-- **Notebooks** (1.1 MB): Jupyter notebooks for EDA, feature engineering, and model development
-- **Documentation** (84 KB): Comprehensive guides and API documentation
-- **Tests** (64 KB): Complete test suite with 95%+ coverage
-- **Configuration** (12 KB): YAML configs and project settings
+### Data Pipeline
+- **10k synthetic pricing rows** with four base features
+- **Feature engineering:** lags, rolling windows, price deltas
+- **Automated cleaning, validation, preprocessing**
+- **Time-series train/validation/test splits** with as-of joins and leakage controls
+- **Ready for orchestration** (e.g., Airflow) for ingest, retraining, and backtests
 
-**Ready to run**: New users can immediately start the service and make predictions without additional setup.
+### Data Science Experimentation Notebooks (EDA → Features → Training)
+Curated Jupyter notebooks for EDA, feature engineering, training experimentation, and backtesting. Each notebook calls into the shared `pricing_rf` library (data loaders, feature builders, metrics, Optuna objectives) to ensure reproducibility and parity with production.
+
+**Index:**
+- `01_eda.ipynb` (sanity checks, leakage probes)
+- `02_feature_prototypes.ipynb` (lags/rolling/deltas, ablations)
+- `03_model_dev_rf.ipynb` (Optuna study, MLflow logging & registry)
+- `04_backtesting_walk_forward.ipynb` (rolling splits, slice analysis)
+
+### Machine Learning Stack
+- **RandomForestRegressor** with Optuna-driven hyperparameter tuning
+- **MLflow** for experiment tracking and model registry
+- **Target:** ≥90% test accuracy with comprehensive error metrics
+- **Walk-forward backtesting** and slice analysis (grade, liquidity, high-value tail)
+- **Optional uncertainty bands** (quantile/conformal) to inform downstream decisions
+
+### FastAPI for Low-Latency Inference
+- **In-process model & preprocessor:** loaded once on startup and kept warm in memory
+- **Async I/O + lightweight validation** (FastAPI/Starlette + Pydantic v2) to minimize overhead
+- **Vectorized preprocessing** (NumPy/pandas) and an I/O-free hot path (no registry/storage calls on request)
+- **Sampling/frequency-gated drift checks** to protect P50/P95 latency; logs/metrics emitted asynchronously
+- **Runtime tuning:** uvicorn workers ≈ CPU cores, uvloop, tuned keep-alives/timeouts; disable compression for small JSON
+- **Performance target:** sub-100 ms P50 for single predictions (tunable toward <50 ms with warm model and batch-friendly endpoints)
+
+### Testing System Overview
+- **Unit tests:** `test_data.py`, `test_features.py`, `test_model.py`, `test_metrics.py`, `test_training.py`, `test_utils.py`
+- **Integration:** `test_service.py` — FastAPI endpoints, model loading, prediction workflows
+- **Monitoring:** `test_monitoring.py` — drift detection, alerting, data validation
+- **Test types:** unit (components), integration (API workflows), end-to-end (full prediction pipeline)
+- **Coverage highlights:** 100% on core schemas and configuration modules
+- **Framework:** pytest with coverage reporting and comprehensive assertions
+- **Mocking:** MLflow, file I/O, and network calls
+- **Data fixtures:** synthetic data for consistent, reproducible environments
+- **API testing:** FastAPI TestClient for endpoint validation and error handling
+- **Performance:** latency and throughput checks on prediction endpoints
+- **Error handling:** exhaustive negative-path scenarios across modules
+- **Configuration:** environment variable and YAML config validation
+- **Authentication:** JWT validation and IP allowlisting scenarios
+
+### Production Service
+- **FastAPI** with autogenerated OpenAPI/Swagger docs
+- **MLflow model loading** for consistent inference
+- **JWT-based authentication**
+- **Real-time drift checks** and alerting
+- **AWS-ready containerization** (Docker), scalable and latency-optimized
+
+## 🔎 Key Features
+
+### Data-Drift Detection
+- **Real-time evaluation** per prediction or on schedule
+- **Methods:** Kolmogorov–Smirnov (KS) and Maximum Mean Discrepancy (MMD)
+- **Runtime-configurable thresholds** and frequency
+- **Historical drift logs** and trend views
+- **Automated alerts** on threshold breaches
+
+![Drift Detection Process](docs/images/drift_example.png)
+
+The drift detection system compares reference training data (`X_source`) with incoming inference data (`X_target`) through dimensionality reduction and statistical two-sample tests to identify distribution shifts that could impact model performance.
+
+### MLOps Capabilities
+- **MLflow runs** with parameters, metrics, artifacts
+- **Optuna studies** for automated tuning
+- **Centralized model versions** with staged deployment (Staging/Production)
+- **Monitoring:** latency, errors, drift scores, model metrics
+- **API documentation** available at `/docs`
+- **Champion/Challenger support** with shadow/canary rollout and rollback gates
+
+### Production Readiness
+- **Async FastAPI endpoints** with Pydantic validation
+- **Structured error handling** and centralized logging
+- **Liveness/readiness health checks**
+- **Single and batch prediction** endpoints
+- **Environment-based configuration** management
+- **Prediction caching** and profiling for cost reduction at scale
+
+## 🧰 Tech Stack
+
+### Core ML & Data Science
+- **scikit-learn ≥ 1.3.0** — classical ML algorithms & utilities · [https://scikit-learn.org/](https://scikit-learn.org/)
+- **pandas ≥ 2.0.0** — tabular data manipulation · [https://pandas.pydata.org/](https://pandas.pydata.org/)
+- **NumPy ≥ 1.24.0** — n-dimensional arrays & math · [https://numpy.org/](https://numpy.org/)
+- **SciPy ≥ 1.10.0** — scientific computing routines · [https://scipy.org/](https://scipy.org/)
+
+### MLflow & Model Management
+- **MLflow ≥ 2.8.0** — experiment tracking, registry, model serving · [https://mlflow.org/](https://mlflow.org/)
+
+### Hyperparameter Optimization
+- **Optuna ≥ 3.0.0** — automated hyperparameter search · [https://optuna.org/](https://optuna.org/)
+
+### FastAPI & Web Service
+- **FastAPI ≥ 0.100.0** — high-performance Python APIs · [https://fastapi.tiangolo.com/](https://fastapi.tiangolo.com/)
+- **Uvicorn ≥ 0.20.0** — ASGI server · [https://www.uvicorn.org/](https://www.uvicorn.org/)
+- **Pydantic ≥ 2.0.0** — data validation & settings models · [https://docs.pydantic.dev/](https://docs.pydantic.dev/)
+- **pydantic-settings ≥ 2.0.0** — 12-factor config via env vars · [https://docs.pydantic.dev/latest/integrations/pydantic_settings/](https://docs.pydantic.dev/latest/integrations/pydantic_settings/)
+
+### Data Processing
+- **PyArrow ≥ 10.0.0** — Arrow/Parquet I/O & memory format · [https://arrow.apache.org/](https://arrow.apache.org/)
+
+### Monitoring & Drift Detection
+- **alibi-detect ≥ 0.12.0** — data/concept drift detectors · [https://docs.seldon.io/projects/alibi-detect/en/stable/](https://docs.seldon.io/projects/alibi-detect/en/stable/)
+
+### Testing
+- **pytest ≥ 7.0.0** — testing framework · [https://docs.pytest.org/](https://docs.pytest.org/)
+- **pytest-cov ≥ 4.0.0** — coverage reporting plugin · [https://pytest-cov.readthedocs.io/](https://pytest-cov.readthedocs.io/)
+
+### Code Quality
+- **Black ≥ 23.0.0** — opinionated code formatter · [https://black.readthedocs.io/](https://black.readthedocs.io/)
+- **Ruff ≥ 0.1.0** — fast Python linter & fixer · [https://docs.astral.sh/ruff/](https://docs.astral.sh/ruff/)
+
+### Jupyter Notebooks
+- **Jupyter ≥ 1.0.0** — interactive notebooks · [https://jupyter.org/](https://jupyter.org/)
 
 ## Quick Start
 
@@ -339,6 +389,10 @@ make docker-build
 # Run container
 make docker-run
 ```
+
+## 🔚 End-to-End Summary
+
+This project is an integrated pricing platform—from research notebooks (EDA → features → training) that call a shared `pricing_rf` library, through Optuna + MLflow for standardized experiments and registry handoff, to walk-forward backtesting and slice analysis for robustness. In production, low latency is first-class: a FastAPI service loads the registered model in-process, keeps the pipeline warmed in memory, and runs a hot, I/O-free path for prediction. Real-time drift checks are sampled to protect tail performance, while auth and operational metrics keep serving safe and observable. Costs are managed with caching, profiling, and autoscaling-friendly containers. The result is a coherent, auditable pipeline—data → training → registry → serving → monitoring—engineered to deliver sub-100 ms single-prediction responses under typical loads.
 
 ## Contributing
 
