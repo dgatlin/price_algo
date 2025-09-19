@@ -1,4 +1,4 @@
-# Pricing Random Forest Model
+# 🌲🌲 Pricing Random Forest Model
 
 A comprehensive pricing prediction system built on a Random Forest regressor with production-grade MLOps: real-time drift detection, MLflow tracking/registry, Optuna hyperparameter optimization, and a FastAPI service for low-latency inference. It delivers an end-to-end path from data to deployment with enterprise-ready monitoring and documentation.
 
