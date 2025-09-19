@@ -2,6 +2,18 @@
 
 A comprehensive pricing prediction system built on a Random Forest regressor with production-grade MLOps: real-time drift detection, MLflow tracking/registry, Optuna hyperparameter optimization, and a FastAPI service for low-latency inference. It delivers an end-to-end path from data to deployment with enterprise-ready monitoring and documentation.
 
+## 🤖 AI-Powered Tech Stack
+
+[![Python 3.11+](https://img.shields.io/badge/python-3.11+-blue.svg)](https://www.python.org/downloads/)
+[![scikit-learn](https://img.shields.io/badge/scikit--learn-1.3+-orange.svg)](https://scikit-learn.org/)
+[![MLflow](https://img.shields.io/badge/MLflow-2.8+-blue.svg)](https://mlflow.org/)
+[![FastAPI](https://img.shields.io/badge/FastAPI-0.100+-teal.svg)](https://fastapi.tiangolo.com/)
+[![Optuna](https://img.shields.io/badge/Optuna-3.0+-purple.svg)](https://optuna.org/)
+[![Pandas](https://img.shields.io/badge/Pandas-2.0+-green.svg)](https://pandas.pydata.org/)
+[![pytest](https://img.shields.io/badge/pytest-7.0+-green.svg)](https://docs.pytest.org/)
+[![Alibi Detect](https://img.shields.io/badge/Alibi%20Detect-0.12+-red.svg)](https://docs.seldon.io/projects/alibi-detect/)
+[![Docker](https://img.shields.io/badge/Docker-Ready-2496ED.svg)](https://www.docker.com/)
+
 ## 🎯 Core Objectives
 - Price prediction using Random Forest regression
 - Production deployment via REST API with monitoring and health checks
@@ -111,43 +123,6 @@ The drift detection system compares reference training data (`X_source`) with in
 - **Single and batch prediction** endpoints
 - **Environment-based configuration** management
 - **Prediction caching** and profiling for cost reduction at scale
-
-## 🧰 Tech Stack
-
-### Core ML & Data Science
-- **scikit-learn ≥ 1.3.0** — classical ML algorithms & utilities · [https://scikit-learn.org/](https://scikit-learn.org/)
-- **pandas ≥ 2.0.0** — tabular data manipulation · [https://pandas.pydata.org/](https://pandas.pydata.org/)
-- **NumPy ≥ 1.24.0** — n-dimensional arrays & math · [https://numpy.org/](https://numpy.org/)
-- **SciPy ≥ 1.10.0** — scientific computing routines · [https://scipy.org/](https://scipy.org/)
-
-### MLflow & Model Management
-- **MLflow ≥ 2.8.0** — experiment tracking, registry, model serving · [https://mlflow.org/](https://mlflow.org/)
-
-### Hyperparameter Optimization
-- **Optuna ≥ 3.0.0** — automated hyperparameter search · [https://optuna.org/](https://optuna.org/)
-
-### FastAPI & Web Service
-- **FastAPI ≥ 0.100.0** — high-performance Python APIs · [https://fastapi.tiangolo.com/](https://fastapi.tiangolo.com/)
-- **Uvicorn ≥ 0.20.0** — ASGI server · [https://www.uvicorn.org/](https://www.uvicorn.org/)
-- **Pydantic ≥ 2.0.0** — data validation & settings models · [https://docs.pydantic.dev/](https://docs.pydantic.dev/)
-- **pydantic-settings ≥ 2.0.0** — 12-factor config via env vars · [https://docs.pydantic.dev/latest/integrations/pydantic_settings/](https://docs.pydantic.dev/latest/integrations/pydantic_settings/)
-
-### Data Processing
-- **PyArrow ≥ 10.0.0** — Arrow/Parquet I/O & memory format · [https://arrow.apache.org/](https://arrow.apache.org/)
-
-### Monitoring & Drift Detection
-- **alibi-detect ≥ 0.12.0** — data/concept drift detectors · [https://docs.seldon.io/projects/alibi-detect/en/stable/](https://docs.seldon.io/projects/alibi-detect/en/stable/)
-
-### Testing
-- **pytest ≥ 7.0.0** — testing framework · [https://docs.pytest.org/](https://docs.pytest.org/)
-- **pytest-cov ≥ 4.0.0** — coverage reporting plugin · [https://pytest-cov.readthedocs.io/](https://pytest-cov.readthedocs.io/)
-
-### Code Quality
-- **Black ≥ 23.0.0** — opinionated code formatter · [https://black.readthedocs.io/](https://black.readthedocs.io/)
-- **Ruff ≥ 0.1.0** — fast Python linter & fixer · [https://docs.astral.sh/ruff/](https://docs.astral.sh/ruff/)
-
-### Jupyter Notebooks
-- **Jupyter ≥ 1.0.0** — interactive notebooks · [https://jupyter.org/](https://jupyter.org/)
 
 ## Quick Start
 
